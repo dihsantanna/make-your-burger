@@ -17,6 +17,10 @@ import { Footer, Header } from './components';
   padding: 0;
 }
 
+#app {
+  position: relative;
+}
+
 .main-container {
   padding: 50px;
 }

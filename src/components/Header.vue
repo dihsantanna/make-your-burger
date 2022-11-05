@@ -20,7 +20,7 @@ export default {
     </router-link>
     <nav class="nav-bar">
       <router-link to="/">Inicio</router-link>
-      <router-link to="/pedidos">Ordens</router-link>
+      <router-link to="/pedidos">Pedidos</router-link>
     </nav>
   </header>
 </template>
