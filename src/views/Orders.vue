@@ -4,7 +4,7 @@ export default {
 };
 </script>
 <template>
-  <main class="orders-page">
+  <main class="main-container">
     <h1>Orders</h1>
   </main>
 </template>
