@@ -80,7 +80,13 @@ const status: StatusType[] = [
   },
 ];
 
-const burgerOrders = [] as BurgerOrderType[];
+const storage = localStorage.getItem('burgerOrder');
+
+const burgerOrders = (storage ? JSON.parse(storage) : []) as BurgerOrderType[];
+
+const setOrderInStorage = (order: BurgerOrderType[]) => {
+  localStorage.setItem('burgerOrder', JSON.stringify(order));
+};
 
 export class DBInMemory {
   private static db = {
@@ -88,6 +94,7 @@ export class DBInMemory {
     status,
     burgerOrders,
   };
+  private static _id = storage ? burgerOrders.at(-1)!.id + 1 : 1;
 
   static get ingredients() {
     return this.db.ingredients;
@@ -101,11 +108,15 @@ export class DBInMemory {
     return this.db.burgerOrders;
   }
 
-  static insertOrder(order: BurgerOrderType[]) {
-    this.db.burgerOrders = [...this.db.burgerOrders, ...order];
+  static async insertOrder(order: BurgerOrderType): Promise<BurgerOrderType> {
+    const newOrder = { ...order, id: this._id, status: 'Solicitado' };
+    this.db.burgerOrders = [...this.db.burgerOrders, newOrder];
+    setOrderInStorage(this.db.burgerOrders);
+    this._id++;
+    return newOrder;
   }
 
-  static changeOrderStatus(orderId: number, statusId: number) {
+  static async changeOrderStatus(orderId: number, statusId: number) {
     this.db.burgerOrders = this.db.burgerOrders.map((order) =>
       order.id === orderId
         ? {
@@ -114,9 +125,11 @@ export class DBInMemory {
           }
         : order,
     );
+    setOrderInStorage(this.db.burgerOrders);
   }
 
-  static removeOrder(orderId: number) {
+  static async removeOrder(orderId: number) {
     this.db.burgerOrders = this.db.burgerOrders.filter((order) => order.id !== orderId);
+    setOrderInStorage(this.db.burgerOrders);
   }
 }

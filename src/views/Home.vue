@@ -1,9 +1,10 @@
 <script lang="ts">
-import { Banner } from '@/components';
+import { Banner, BurgerForm } from '@/components';
 export default {
   name: 'Home',
   components: {
     Banner,
+    BurgerForm,
   },
 };
 </script>
@@ -11,7 +12,7 @@ export default {
   <Banner />
   <main class="main-container">
     <h1>Monte o seu burger:</h1>
-    <form>Formulário</form>
+    <BurgerForm />
   </main>
 </template>
 

@@ -19,10 +19,12 @@ import { Footer, Header } from './components';
 
 #app {
   position: relative;
+  width: 100vw;
 }
 
 .main-container {
   padding: 50px;
+  width: 100%;
 }
 
 h1 {

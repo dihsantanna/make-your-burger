@@ -17,6 +17,7 @@ export default {
   display: flex;
   height: 80vh;
   justify-content: flex-start;
+  width: 100%;
 }
 
 .main-banner h1 {
