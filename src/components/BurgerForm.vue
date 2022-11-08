@@ -3,9 +3,13 @@ import { getIngredients, postOrder } from '@/services';
 import type { BurgerOrderType, IngredientsType } from '@/types';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
+import Spin from './Spin.vue';
 
 export default {
   name: 'BurgerForm',
+  components: {
+    Spin,
+  },
   data() {
     return {
       ingredients: {} as IngredientsType,
@@ -62,7 +66,7 @@ export default {
 </script>
 <template>
   <div v-if="loading" class="form-loading">
-    <div class="spin" />
+    <Spin borderSize="2px" duration="0.5s" size="60px" class="loading-spin" />
   </div>
   <form v-if="!loading" class="burger-form" @submit="createOrder">
     <div class="input-container">
@@ -112,7 +116,7 @@ export default {
     <div class="input-container">
       <button class="submit-btn" type="submit">
         {{ !sendingOrder ? 'Enviar Pedido' : null }}
-        <div v-if="sendingOrder" class="spin-btn" />
+        <Spin v-if="sendingOrder" class="spin-btn" />
       </button>
     </div>
   </form>
@@ -196,32 +200,11 @@ select {
   margin-top: 5px;
 }
 
-.spin,
-.spin-btn {
-  animation: spin 0.5s linear infinite;
-  border: 2px solid #e8e6e8;
-  border-left: 2px solid #fcba03;
-  border-radius: 50%;
+.loading-spin {
   margin: 120px auto;
-  height: 60px;
-  width: 60px;
 }
 
 .spin-btn {
-  animation-duration: 0.3s;
-  border: 1.5px solid #e8e6e8;
-  border-left: 1.5px solid #fcba03;
-  height: 20px;
   margin: 0 auto;
-  width: 20px;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 </style>

@@ -16,3 +16,24 @@ export const postOrder = async (order: BurgerOrderType) => {
   const response = await DBInMemory.insertOrder(order);
   return response;
 };
+
+export const getOrders = async () => {
+  await sleep(2000);
+  return DBInMemory.burgerOrders;
+};
+
+export const getOrdersStatus = async () => {
+  await sleep(2000);
+  return DBInMemory.status;
+};
+
+export const updateOrderStatus = async (orderId: number, statusId: number) => {
+  await sleep(2000);
+  const data = await DBInMemory.changeOrderStatus(orderId, statusId);
+  return data;
+};
+
+export const deleteOrder = async (orderId: number) => {
+  await sleep(2000);
+  await DBInMemory.removeOrder(orderId);
+};

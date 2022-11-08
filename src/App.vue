@@ -19,6 +19,7 @@ import { Footer, Header } from './components';
 
 #app {
   position: relative;
+  min-height: 100vh;
   width: 100vw;
 }
 

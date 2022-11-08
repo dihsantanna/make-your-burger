@@ -109,23 +109,27 @@ export class DBInMemory {
   }
 
   static async insertOrder(order: BurgerOrderType): Promise<BurgerOrderType> {
-    const newOrder = { ...order, id: this._id, status: 'Solicitado' };
+    const newOrder = { ...order, id: this._id, status: 'Solicitado' } as BurgerOrderType;
     this.db.burgerOrders = [...this.db.burgerOrders, newOrder];
     setOrderInStorage(this.db.burgerOrders);
     this._id++;
     return newOrder;
   }
 
-  static async changeOrderStatus(orderId: number, statusId: number) {
-    this.db.burgerOrders = this.db.burgerOrders.map((order) =>
-      order.id === orderId
-        ? {
-            ...order,
-            status: this.db.status.find((status) => status.id === statusId)?.type as Status,
-          }
-        : order,
-    );
+  static async changeOrderStatus(orderId: number, statusId: number): Promise<BurgerOrderType> {
+    const status = this.db.status.find((status) => status.id === statusId)?.type as Status;
+    let updatedOrder = {} as BurgerOrderType;
+    this.db.burgerOrders = this.db.burgerOrders.map((order) => {
+      if (order.id === orderId) {
+        updatedOrder = { ...order, status };
+        return updatedOrder;
+      }
+      return order;
+    });
+
     setOrderInStorage(this.db.burgerOrders);
+
+    return updatedOrder;
   }
 
   static async removeOrder(orderId: number) {
