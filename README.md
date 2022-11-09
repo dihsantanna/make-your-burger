@@ -1,46 +1,58 @@
-# make-your-burger
+# Make Your Burger :hamburger:
 
-This template should help get you started developing with Vue 3 in Vite.
+Pequeno CRUD com autenticação, desenvolvido demonstrando conhecimentos em VueJS. A ideia de projeto foi retirado do canal [Matheus Battisti - Hora de Codar](https://www.youtube.com/c/MatheusBattisti), porém foram adicionados alguns toques pessoais como a adição de TypeScript, e um pequeno sistema de autenticação para login de usuário administrador.
 
-## Recommended IDE Setup
+## Stacks Utilizadas 💻
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- [TypeScript](https://www.typescriptlang.org);
+- [VueJS](https://www.vuejs.org);
+- [CSS Vanilla](https://developer.mozilla.org/pt-BR/docs/Web/CSS);
+- [Vite](https://vitejs.dev);
+- [ESLint](https://eslint.org);
 
-## Type Support for `.vue` Imports in TS
+![Gif de demonstração](demonstracao.gif)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+Você pode conferir a aplicação em produção [aqui](https://make-your-burger-project.vercel.app/).
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+### `Dados para o Login:`
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+```sh
+  email: admin@user.com
+  senha: 12345678
+```
 
-## Customize configuration
+---
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Rodando a aplicação;
 
-## Project Setup
+### Clone o repositório
+
+```sh
+git clone git@github.com:dihsantanna/make-your-burger.git && cd ./make-your-burger
+```
+
+### Instale as dependências
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Rode a aplicação
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
+### Rodando lint
 
 ```sh
 npm run lint
 ```
+
+---
+
+## Para o Futuro
+
+- Sistema para editar pedidos;
+- Adicionar responsividade, para a utilização em aparelhos mobile;
+- Cobertura de testes.
