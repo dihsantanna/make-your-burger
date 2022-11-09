@@ -88,8 +88,6 @@ const setOrderInStorage = (order: BurgerOrderType[]) => {
   localStorage.setItem('burgerOrder', JSON.stringify(order));
 };
 
-const secret = 'umaSenhaMuitoDificil';
-
 export class DBInMemory {
   private static db = {
     ingredients,
