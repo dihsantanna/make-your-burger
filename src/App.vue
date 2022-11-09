@@ -1,10 +1,30 @@
-<script setup lang="ts">
+<script lang="ts">
 import logo from './assets/logo.png';
 import { Footer, Header } from './components';
+
+export default {
+  name: 'App',
+  components: {
+    Footer,
+    Header,
+  },
+  data() {
+    return {
+      logo,
+      altLogo: 'Logo da Hamburgueria',
+      isLogged: false,
+    };
+  },
+  methods: {
+    handleIsLogged(bool: boolean) {
+      this.isLogged = bool;
+    },
+  },
+};
 </script>
 
 <template>
-  <Header :logo="logo" altLogo="Make Your Burger" />
+  <Header :logo="logo" :altLogo="altLogo" :logged="isLogged" :handleIsLogged="handleIsLogged" />
   <router-view />
   <Footer />
 </template>

@@ -1,5 +1,5 @@
-import { DBInMemory } from '@/data';
-import type { BurgerOrderType } from '@/types';
+import type { BurgerOrderType, UserType } from '@/types';
+import { DBInMemory, Login } from '@/utils';
 
 const sleep = async (maxMS: number) => {
   const ms = parseInt((Math.random() * maxMS).toString());
@@ -36,4 +36,16 @@ export const updateOrderStatus = async (orderId: number, statusId: number) => {
 export const deleteOrder = async (orderId: number) => {
   await sleep(2000);
   await DBInMemory.removeOrder(orderId);
+};
+
+export const login = async (email: string, password: string) => {
+  await sleep(2000);
+  const data = Login.login({ email, password } as UserType);
+  return data;
+};
+
+export const tokenValidate = async (token: string) => {
+  await sleep(2000);
+  const data = Login.tokenValidate(token);
+  return data;
 };

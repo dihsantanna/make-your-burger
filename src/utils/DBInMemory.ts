@@ -1,4 +1,4 @@
-import type { BurgerOrderType, IngredientsType, Status, StatusType } from '@/types';
+import type { BurgerOrderType, IngredientsType, Status, StatusType, UserType } from '@/types';
 
 const ingredients: IngredientsType = {
   breads: [
@@ -88,13 +88,24 @@ const setOrderInStorage = (order: BurgerOrderType[]) => {
   localStorage.setItem('burgerOrder', JSON.stringify(order));
 };
 
+const secret = 'umaSenhaMuitoDificil';
+
 export class DBInMemory {
   private static db = {
     ingredients,
     status,
     burgerOrders,
   };
+
   private static _id = storage ? burgerOrders.at(-1)!.id + 1 : 1;
+
+  private static users: UserType[] = [
+    {
+      id: 1,
+      email: 'admin@user.com',
+      password: '12345678',
+    },
+  ];
 
   static get ingredients() {
     return this.db.ingredients;
@@ -106,6 +117,11 @@ export class DBInMemory {
 
   static get burgerOrders() {
     return this.db.burgerOrders;
+  }
+
+  static getUser(email: string) {
+    const data = this.users.find((user) => user.email === email);
+    return data;
   }
 
   static async insertOrder(order: BurgerOrderType): Promise<BurgerOrderType> {
