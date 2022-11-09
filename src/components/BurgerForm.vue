@@ -1,8 +1,7 @@
 <script lang="ts">
-import { getIngredients, postOrder } from '@/services';
+import { getIngredients, postOrder, tokenValidate } from '@/services';
 import type { BurgerOrderType, IngredientsType } from '@/types';
 import { useToast } from 'vue-toast-notification';
-import 'vue-toast-notification/dist/theme-sugar.css';
 import Spin from './Spin.vue';
 
 export default {
@@ -22,6 +21,19 @@ export default {
     };
   },
   methods: {
+    async isLogged() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        this.$router.push('/');
+        return;
+      }
+      const validate = await tokenValidate(token);
+
+      if (!validate) {
+        this.$router.push('/');
+        return;
+      }
+    },
     async getIngredients() {
       const data = await getIngredients();
       this.ingredients = data;

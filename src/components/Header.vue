@@ -1,6 +1,9 @@
 <script lang="ts">
+import LoginForm from './LoginForm.vue';
+
 export default {
   name: 'Header',
+  components: { LoginForm },
   props: {
     logo: {
       type: String,
@@ -9,6 +12,21 @@ export default {
     altLogo: {
       type: String,
       required: true,
+    },
+    logged: {
+      type: Boolean,
+      required: true,
+    },
+    handleIsLogged: {
+      type: Function,
+      required: true,
+    },
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem('token');
+      this.handleIsLogged(false);
+      this.$router.push('/');
     },
   },
 };
@@ -19,8 +37,10 @@ export default {
       <img :src="logo" :alt="altLogo" class="logo" />
     </router-link>
     <nav class="nav-bar">
-      <router-link to="/">Inicio</router-link>
-      <router-link to="/pedidos">Pedidos</router-link>
+      <LoginForm v-if="!logged" :handleIsLogged="handleIsLogged" />
+      <router-link v-if="logged" to="/">Inicio</router-link>
+      <router-link v-if="logged" to="/pedidos">Pedidos</router-link>
+      <button v-if="logged" class="logout-btn" type="button" @click="logout">Sair</button>
     </nav>
   </header>
 </template>
@@ -46,15 +66,24 @@ export default {
   gap: 50px;
 }
 
-a {
+a,
+.logout-btn {
   color: #fcba03;
   text-decoration: none;
   opacity: 0.9;
   transition: 0.5s;
 }
 
-a:hover {
+a:hover,
+.logout-btn:hover {
   color: white;
   opacity: 1;
+}
+
+.logout-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
 }
 </style>
